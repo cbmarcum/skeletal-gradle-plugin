@@ -1,0 +1,159 @@
+/* build into a build repo with:
+* ./gradlew publish
+* or to publish locally
+* ./gradlew publishToMavenLocal
+* or to publish to gradle plugins
+* ./gradlew publishPlugins
+*
+* to update this wrapper version
+* $ gradle wrapper --gradle-version 6.7 --distribution-type all
+*/
+
+plugins {
+    id 'groovy'
+    id 'signing'
+    // Apply the Plugin Publish plugin to make plugin publication possible.
+    // The Plugin Publish plugin will in turn auto-apply the Gradle Plugin Development Plugin (java-gradle-plugin)
+    // and the Maven Publish plugin (maven-publish).
+    id "com.gradle.plugin-publish" version "1.0.0"
+}
+
+// ignored by publish but used with jar task alone
+archivesBaseName = "skeletal-gradle"
+group = "net.codebuilders"
+version = '1.6.0' // bumped to v1.4 for gradle repo
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+ext {
+    isReleaseVersion = !version.endsWith("SNAPSHOT") // used to not pgp sign snapshots
+    // isReleaseVersion = false  // to force not signing
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // gradleApi() drags in the Groovy bundled with Gradle, so always a good idea
+    // to specify localGroovy() too
+    implementation localGroovy(), gradleApi()
+
+    testImplementation("org.spockframework:spock-core:0.7-groovy-2.0") {
+        exclude module: "groovy-all"
+    }
+    testImplementation "cglib:cglib-nodep:2.2.2"
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+/* pluginMaven is a special undocumented name used by the gradle plugin so we
+  * don't create two publications by using gradle plugin and maven publish.
+  * https://github.com/gradle/gradle/issues/10384 */
+publishing {
+
+    afterEvaluate {
+
+        publications {
+
+            withType(MavenPublication) {
+                // customize all publications here
+                pom {
+
+                    packaging = 'jar'
+                    description = 'Skeletal - a Gradle plugin for Lazybones templates'
+                    url = 'http://codebuilders.net'
+                    inceptionYear = '2016'
+
+                    scm {
+                        url = 'https://github.com/cbmarcum/skeletal-gradle-plugin'
+                        developerConnection = 'https://github.com/cbmarcum/skeletal-gradle-plugin'
+                        connection = 'https://github.com/cbmarcum/skeletal-gradle-plugin'
+                    }
+
+                    licenses {
+                        license {
+                            name = 'The Apache Software License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                            distribution = 'repo'
+                        }
+                    }
+
+                    developers {
+                        // Original Lazybones developers
+                        developer {
+                            name = 'Peter Ledbrook'
+                        }
+                        developer {
+                            name = 'Kyle Boon'
+                        }
+                        developer {
+                            name = 'Tommy Barker'
+                        }
+                        // Skeletal fork
+                        developer {
+                            name = 'Carl Marcum'
+                            email = 'carl.marcum@codebuilders.net'
+                            url = 'http://codebuilders.net'
+                            organization = 'Code Builders, LLC'
+                            organizationUrl = 'http://codebuilders.net'
+
+                        }
+                    }
+                }
+
+            }
+
+            pluginMaven {
+                // customize main publications here
+                artifactId = 'skeletal-gradle'
+                // from components.java
+                // versionMapping placeholder
+                pom {
+                    name = 'Skeletal Gradle Plugin main artifact'
+                }
+            } // pluginMaven
+
+
+        } // publications
+
+    } // afterEvaluate
+
+    repositories {
+        maven {
+            // change URLs to point to your repos, e.g. http://my.org/repo
+            def releasesRepoUrl = "$buildDir/repos/releases"
+            def snapshotsRepoUrl = "$buildDir/repos/snapshots"
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+        }
+    }
+}
+
+// credentials in .gradle
+signing {
+    // only pgp sign if not a snapshot and we are uploading to maven repo
+    required { isReleaseVersion }
+    // sign publishing.publications.pluginMaven
+    sign publishing.publications
+    // sign configurations.archives
+}
+
+pluginBundle {
+    website = 'https://github.com/cbmarcum/skeletal-gradle-plugin'
+    vcsUrl = 'https://github.com/cbmarcum/skeletal-gradle-plugin'
+    tags = ['skeletal', 'lazybones', 'template']
+}
+gradlePlugin {
+    plugins {
+        skeletalPlugin {
+            id = 'net.codebuilders.lazybones-templates'
+            displayName = 'Lazybones template plugin'
+            description = 'A Gradle plugin to aid the packaging and distribution of Lazybones templates.'
+            implementationClass = 'uk.co.cacoethes.gradle.LazybonesTemplatesPlugin'
+        }
+    }
+}
