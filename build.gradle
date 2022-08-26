@@ -21,7 +21,7 @@ plugins {
 // ignored by publish but used with jar task alone
 archivesBaseName = "skeletal-gradle"
 group = "net.codebuilders"
-version = '1.6.0' // bumped to v1.4 for gradle repo
+version = '1.6.0' // bumped to v1.6 for gradle repo after rebrand
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
