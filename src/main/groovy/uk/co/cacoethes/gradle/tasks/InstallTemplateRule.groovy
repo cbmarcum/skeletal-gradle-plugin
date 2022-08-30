@@ -8,7 +8,7 @@ import uk.co.cacoethes.gradle.util.NameConverter
 
 /**
  * A rule that creates tasks for installing a Lazybones template package into the
- * template cache (typically ~/.lazybones/templates). The tasks have the name
+ * template cache (typically ~/.skeletal/templates). The tasks have the name
  * 'installTemplate<templateName>', where the template name is in camel-case. The
  * install tasks are automatically configured to depend on the corresponding
  * package task defined by {@link PackageTemplateRule}.

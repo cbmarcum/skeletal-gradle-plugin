@@ -13,7 +13,7 @@ import uk.co.cacoethes.gradle.util.NameConverter
  * Plugin to aid the packaging and distribution of Lazybones templates. It
  * provides both tasks and a [@link LazybonesConventions set of conventions}.
  * The tasks allow you to package the templates, install them into the
- * Lazybones cache and publish them to a URL simple repository.
+ * Skeletal cache and publish them to a URL simple repository.
  */
 class LazybonesTemplatesPlugin implements Plugin<Project> {
     static final String SUBTEMPLATE_PREFIX = "subtmpl-"
@@ -28,7 +28,7 @@ class LazybonesTemplatesPlugin implements Plugin<Project> {
         def extension = project.extensions.create("lazybones", LazybonesConventions, project)
         extension.templateDirs = defaultTemplateDirs ? project.files(defaultTemplateDirs) : project.files()
         extension.packagesDir = project.file("${project.buildDir}/packages")
-        extension.installDir = new File(System.getProperty("user.home"), ".lazybones/templates")
+        extension.installDir = new File(System.getProperty("user.home"), ".skeletal/templates")
         extension.packageNameSuffix = "-template"
         extension.packageExcludes = ["**/.retain", "VERSION", "DESCRIPTION", ".gradle"]
         extension.publish = false
