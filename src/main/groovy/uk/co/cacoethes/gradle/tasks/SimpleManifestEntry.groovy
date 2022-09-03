@@ -33,7 +33,7 @@ class SimpleManifestEntry extends DefaultTask {
     String tmplDestination
 
     /**
-     *
+     * The task action
      * @return
      */
     @TaskAction
@@ -55,7 +55,7 @@ class SimpleManifestEntry extends DefaultTask {
         if (manifest.createNewFile()) {
             manifest << "name,version,owner,description\n"
         }
-        manifest << "${packageName},${version},${tmplOwner},${tmplDescription}\n"
+        manifest << "${packageName},${version},\"${tmplOwner}\",\"${tmplDescription}\"\n"
     }
 
 } // end Task
