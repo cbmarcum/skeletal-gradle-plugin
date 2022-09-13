@@ -19,7 +19,7 @@ The plugin is available in the Gradle [plugin portal](https://plugins.gradle.org
 To configure it using the plugins DSL:
 
     plugins {
-        id "net.codebuilders.lazybones-templates" version "1.6.1"
+        id "net.codebuilders.lazybones-templates" version "1.6.2"
     }
     ...
 or using the legacy plugin application:
@@ -31,7 +31,7 @@ or using the legacy plugin application:
             }
         }
         dependencies {
-            classpath "net.codebuilders:skeletal-gradle:1.6.1"
+            classpath "net.codebuilders:skeletal-gradle:1.6.2"
         }
     }
 
