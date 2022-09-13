@@ -1,5 +1,9 @@
 # Skeletal Gradle Plugin
 
+This Gradle plugin is a sibling project to the [Skeletal Project Creation Tool](https://github.com/cbmarcum/skeletal) and was originally a sub-project 
+in the original [Lazybones Project](https://github.com/pledbrook/lazybones) 
+before this fork of the project. 
+
 The mechanics of publishing Lazybones templates is straightforward and could
 be done manually. That doesn't mean it's not a lot of work though. If you want
 to manage and publish Lazybones templates, we strongly recommend you use Gradle
