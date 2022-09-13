@@ -52,7 +52,7 @@ Each directory under 'templates' contains the source files for one project
 template. The name of the project template derives from the name of the
 directory. In the above example, we end up with a project template named
 'mytmpl'. For more information on what goes inside these project template
-directories, see the [Template Developers Guide](https://github.com/cbmarcum/skeletal/wiki/Template-Developers-Guide).
+directories, see the [Template Developers Guide](https://cbmarcum.github.io/skeletal/template-developers-guide.html).
 
 Lazybones required `repositoryName`, `repositoryUsername`, and `repositoryApiKey` 
 properties need for Bintray publishing to be in the `lazybones` configuration 
