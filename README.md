@@ -1,7 +1,7 @@
 # Skeletal Gradle Plugin
 ## Quick Links
 
-* [Applying the Gradle Plugin](file:///home/carl/dev-git/skeletal-gradle-plugin/docs/index.html#_apply_the_plugin)
+* [Applying the Gradle Plugin](https://cbmarcum.github.io/skeletal-gradle-plugin/index.html#_apply_the_plugin)
 * [Skeletal Gradle  Plugin User Guide](https://cbmarcum.github.io/skeletal-gradle-plugin/index.html)
 * [Skeletal App and Template Guides](https://cbmarcum.github.io/skeletal/index.html)
 * [Skeletal Project Creation Tool](https://github.com/cbmarcum/skeletal)
