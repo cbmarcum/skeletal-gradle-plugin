@@ -8,6 +8,8 @@
 
 image::skeletal-logo-300x350.png[width=200,alt="skeletal logo"]
 
+## Quick Links
+
 - https://github.com/cbmarcum/skeletal-gradle-plugin[Skeletal Gradle Plugin Project]
 - https://github.com/cbmarcum/skeletal[{app-name} Project Creation Tool Project]
 - https://cbmarcum.github.io/skeletal/application-users-guide.html[Application Users Guide]
@@ -218,3 +220,5 @@ tasks are instances of the standard `Copy`.
 Currently, package publishing is done through the https://github.com/cbmarcum/skeletal/blob/master/lazybones-gradle-plugin/src/main/groovy/uk/co/cacoethes/gradle/tasks/SimpleManifestEntry.groovy[SimpleManifestEntry],
 which packages one or all plugins and creates or updates a `skeletal-manifest.txt`
 file for copying to your simple URL repository.
+
+Complete information on template development can be found in the https://cbmarcum.github.io/skeletal/template-developers-guide.html[Template Developers Guide].
