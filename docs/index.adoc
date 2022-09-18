@@ -38,9 +38,10 @@ To configure it using the plugins DSL:
 
 .current gradle method
 [source,groovy]
+[subs="verbatim,attributes"]
 ----
 plugins {
-    id "net.codebuilders.lazybones-templates" version "1.6.2"
+    id "net.codebuilders.lazybones-templates" version "{app-version}"
 }
 ...
 ----
@@ -49,6 +50,7 @@ or using the legacy plugin application:
 
 .legacy gradle
 [source,groovy]
+[subs="verbatim,attributes"]
 ----
 buildscript {
     repositories {
@@ -57,7 +59,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath "net.codebuilders:skeletal-gradle:1.6.2"
+        classpath "net.codebuilders:skeletal-gradle:{app-version}"
     }
 }
 
