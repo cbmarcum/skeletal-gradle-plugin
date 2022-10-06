@@ -52,6 +52,7 @@ To publish into your local Maven cache
 ```shell
 ./gradlew publishToMavenLocal
 ```
+You will need to either setup signing credentials for the [Signing Plugin](https://docs.gradle.org/current/userguide/signing_plugin.html), make the version end in _-SNAPSHOT_, or force the build variable _isReleaseVersion_ to false.
 
 To publish to [Gradle Plugins](https://plugins.gradle.org/plugin/net.codebuilders.lazybones-templates)
 ```shell
