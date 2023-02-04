@@ -35,16 +35,16 @@ build/repos/releases
     `-- codebuilders
         |-- lazybones-templates
         |   `-- net.codebuilders.lazybones-templates.gradle.plugin
-        |       |-- 1.6.2
-        |       |   |-- net.codebuilders.lazybones-templates.gradle.plugin-1.6.2.pom
+        |       |-- 1.7.1
+        |       |   |-- net.codebuilders.lazybones-templates.gradle.plugin-1.7.1.pom
         |       `-- maven-metadata.xml
         `-- skeletal-gradle
-            |-- 1.6.2
-            |   |-- skeletal-gradle-1.6.2.jar
-            |   |-- skeletal-gradle-1.6.2-javadoc.jar
-            |   |-- skeletal-gradle-1.6.2.module
-            |   |-- skeletal-gradle-1.6.2.pom
-            |   |-- skeletal-gradle-1.6.2-sources.jar
+            |-- 1.7.1
+            |   |-- skeletal-gradle-1.7.1.jar
+            |   |-- skeletal-gradle-1.7.1-javadoc.jar
+            |   |-- skeletal-gradle-1.7.1.module
+            |   |-- skeletal-gradle-1.7.1.pom
+            |   |-- skeletal-gradle-1.7.1-sources.jar
             `-- maven-metadata.xml
 ```
 
