@@ -67,7 +67,7 @@ class NameConverter {
 
         def out = new StringBuffer()
         def m = name =~ /-([a-zA-Z])/
-        while (m) {
+        while (m.find()) {
             m.appendReplacement out, m.group(1).toUpperCase()
         }
         m.appendTail out
