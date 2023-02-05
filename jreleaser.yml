@@ -1,0 +1,49 @@
+# Generated with JReleaser 1.4.0 at 2023-02-04T18:40:11.120979-05:00
+project:
+  name: skeletal-gradle-plugin
+  description: Gradle plugin for Skeletal templates
+  longDescription: Skeletal plugin to manage multiple templates and package, install, and publish them.
+  authors:
+    - Carl Marcum
+  license: Apache-2.0
+  links:
+    homepage: https://github.com/cbmarcum/skeletal-gradle-plugin
+  java:
+    groupId: net.codebuilders
+    version: 8
+  inceptionYear: 2021
+
+release:
+  github:
+    owner: cbmarcum
+    overwrite: true
+    sign: false
+    # discussionCategoryName: 'Announcements'
+    changelog:
+      formatted: 'ALWAYS'
+      preset: 'conventional-commits'
+      contributors:
+        format: '- {{contributorName}}{{#contributorUsernameAsLink}} ({{.}}){{/contributorUsernameAsLink}}'
+      # skipMergeCommits: true
+      # using this instead
+      hide:
+        categories:
+          - 'merge'
+
+signing:
+  active: never # always
+  armored: true
+
+distributions:
+  skeletal-gradle:
+    artifacts:
+      - path: build/distributions/{{distributionName}}-{{projectVersion}}.jar
+      - path: build/distributions/{{distributionName}}-{{projectVersion}}.jar.asc
+      - path: build/distributions/{{distributionName}}-{{projectVersion}}-javadoc.jar
+      - path: build/distributions/{{distributionName}}-{{projectVersion}}-javadoc.jar.asc
+      - path: build/distributions/{{distributionName}}-{{projectVersion}}-sources.jar
+      - path: build/distributions/{{distributionName}}-{{projectVersion}}-sources.jar.asc
+      - path: build/distributions/{{distributionName}}-{{projectVersion}}.jar
+      - path: build/publications/pluginMaven/pom-default.xml
+      - path: build/publications/pluginMaven/module.json
+      - path: build/publications/pluginMaven/module.json.asc
