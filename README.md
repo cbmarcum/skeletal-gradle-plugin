@@ -28,7 +28,7 @@ To build into a repo within the build output
 ```
 This builds a repo layout that you can use from an Artifactory Gradle repository or similar artifact repository.
 
-checksums and signatures removed for brevity...
+checksums and signatures removed for brevity and version may not be latest...
 ```shell
 build/repos/releases
 `-- net
@@ -59,6 +59,19 @@ To publish to [Gradle Plugins](https://plugins.gradle.org/plugin/net.codebuilder
 ./gradlew publishPlugins
 ```
 This can only be done by the Skeletal project owner for this plugin name.
+
+## Creating a Release
+Releases are created in the GitHub repo by creating a tag and a Release based on that tag and a Changelog of major changes and uploading build artifacts and source archives.
+
+This is automated by JReleaser using the jreleaser.yml configuration file.
+
+Steps to create a release after Gradle `publish` or `publishPlugins`
+1. `export JRELEASER_PROJECT_VERSION=version to release`
+2. `export JRELEASER_OUTPUT_DIRECTORY=build` (until added to jreleaser.yml)
+3. `jreleaser config`
+4. `jreleaser full-release --dry-run`
+5. check `build/jreleaser/release/CHANGELOG.md` for errors
+6. `jreleaser full-release`
 
 ## Credits
 

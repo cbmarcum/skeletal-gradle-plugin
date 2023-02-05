@@ -1,8 +1,8 @@
 # Generated with JReleaser 1.4.0 at 2023-02-04T18:40:11.120979-05:00
 project:
   name: skeletal-gradle-plugin
-  description: Gradle plugin for Skeletal templates
-  longDescription: Skeletal plugin to manage multiple templates and package, install, and publish them.
+  description: Gradle plugin for Lazybones templates
+  longDescription: A Gradle plugin to aid the packaging and distribution of Lazybones templates.
   authors:
     - Carl Marcum
   license: Apache-2.0
@@ -34,16 +34,15 @@ signing:
   active: never # always
   armored: true
 
-distributions:
-  skeletal-gradle:
-    artifacts:
-      - path: build/distributions/{{distributionName}}-{{projectVersion}}.jar
-      - path: build/distributions/{{distributionName}}-{{projectVersion}}.jar.asc
-      - path: build/distributions/{{distributionName}}-{{projectVersion}}-javadoc.jar
-      - path: build/distributions/{{distributionName}}-{{projectVersion}}-javadoc.jar.asc
-      - path: build/distributions/{{distributionName}}-{{projectVersion}}-sources.jar
-      - path: build/distributions/{{distributionName}}-{{projectVersion}}-sources.jar.asc
-      - path: build/distributions/{{distributionName}}-{{projectVersion}}.jar
-      - path: build/publications/pluginMaven/pom-default.xml
-      - path: build/publications/pluginMaven/module.json
-      - path: build/publications/pluginMaven/module.json.asc
+files:
+  artifacts:
+    - path: build/libs/skeletal-gradle-{{projectVersion}}.jar
+    - path: build/libs/skeletal-gradle-{{projectVersion}}.jar.asc
+    - path: build/libs/skeletal-gradle-{{projectVersion}}-javadoc.jar
+    - path: build/libs/skeletal-gradle-{{projectVersion}}-javadoc.jar.asc
+    - path: build/libs/skeletal-gradle-{{projectVersion}}-sources.jar
+    - path: build/libs/skeletal-gradle-{{projectVersion}}-sources.jar.asc
+    - path: build/libs/skeletal-gradle-{{projectVersion}}.jar
+    - path: build/publications/pluginMaven/pom-default.xml
+    - path: build/publications/pluginMaven/module.json
+    - path: build/publications/pluginMaven/module.json.asc
