@@ -1,6 +1,7 @@
 # Generated with JReleaser 1.4.0 at 2023-02-04T18:40:11.120979-05:00
 project:
   name: skeletal-gradle-plugin
+  version: 2.0.0
   description: Gradle plugin for Lazybones templates
   longDescription: A Gradle plugin to aid the packaging and distribution of Lazybones templates.
   authors:
@@ -10,7 +11,7 @@ project:
     homepage: https://github.com/cbmarcum/skeletal-gradle-plugin
   java:
     groupId: net.codebuilders
-    version: 8
+    version: 17
   inceptionYear: 2021
 
 release:

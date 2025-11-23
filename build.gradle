@@ -6,7 +6,7 @@
 * ./gradlew publishPlugins
 *
 * to update this wrapper version
-* $ gradle wrapper --gradle-version 7.6 --distribution-type all
+* $ gradle wrapper --gradle-version 8.14 --distribution-type all
 */
 
 plugins {
@@ -15,17 +15,14 @@ plugins {
     // Apply the Plugin Publish plugin to make plugin publication possible.
     // The Plugin Publish plugin will in turn auto-apply the Gradle Plugin Development Plugin (java-gradle-plugin)
     // and the Maven Publish plugin (maven-publish).
-    id "com.gradle.plugin-publish" version "1.0.0"
+    id "com.gradle.plugin-publish" version "2.0.0"
 }
 
 // ignored by publish but used with jar task alone
 archivesBaseName = "skeletal-gradle"
 group = "net.codebuilders"
-// make sure to also change this in doc header
-version = '1.7.1'
-
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+// make sure to also change this in doc header and jreleaser.yml
+version = '2.0.0'
 
 ext {
     isReleaseVersion = !version.endsWith("SNAPSHOT") // used to not pgp sign snapshots
@@ -39,18 +36,38 @@ repositories {
 dependencies {
     // gradleApi() drags in the Groovy bundled with Gradle, so always a good idea
     // to specify localGroovy() too
-    implementation localGroovy(), gradleApi()
+    implementation gradleApi()
+    implementation localGroovy()
 
-    testImplementation("org.spockframework:spock-core:2.2-groovy-3.0") {
-        exclude module: "groovy-all"
+    testImplementation("org.spockframework:spock-core:2.4-M7-groovy-3.0")
+    testImplementation "net.bytebuddy:byte-buddy:1.14.11"
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+// Apply a specific Java toolchain to ease working on different environments.
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
     }
-    testImplementation "cglib:cglib-nodep:2.2.2"
+}
+
+groovydoc {
+    docTitle = "Skeletal Gradle Plugin"
+    header = "Code Builders, LLC" // doesn't seem to work
+    footer = "Generated documentation ${version}"
+    windowTitle = docTitle
+    use = true // create class and package usage pages
 }
 
 java {
     withJavadocJar()
     withSourcesJar()
 }
+
 
 /* pluginMaven is a special undocumented name used by the gradle plugin so we
   * don't create two publications by using gradle plugin and maven publish.
@@ -143,18 +160,17 @@ signing {
     // sign configurations.archives
 }
 
-pluginBundle {
+gradlePlugin {
     website = 'https://github.com/cbmarcum/skeletal-gradle-plugin'
     vcsUrl = 'https://github.com/cbmarcum/skeletal-gradle-plugin'
-    tags = ['skeletal', 'lazybones', 'template']
-}
-gradlePlugin {
+    
     plugins {
         skeletalPlugin {
             id = 'net.codebuilders.lazybones-templates'
             displayName = 'Lazybones template plugin'
             description = 'A Gradle plugin to aid the packaging and distribution of Lazybones templates.'
             implementationClass = 'uk.co.cacoethes.gradle.LazybonesTemplatesPlugin'
+            tags = ['skeletal', 'lazybones', 'template']
         }
     }
 }

@@ -4,7 +4,7 @@
 :toc: left
 :imagesdir: images
 :app-name: Skeletal
-:app-version: 1.7.1
+:app-version: 2.0.0
 
 image::skeletal-logo-300x350.png[width=200,alt="skeletal logo"]
 
