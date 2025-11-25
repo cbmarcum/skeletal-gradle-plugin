@@ -14,6 +14,8 @@ import uk.co.cacoethes.gradle.util.NameConverter
  * package task defined by {@link PackageTemplateRule}.
  */
 class InstallTemplateRule implements Rule {
+    private static final String TEMPLATE_NAME_PATTERN = /installTemplate([A-Z\-]\S+)/
+
     Project project
 
     InstallTemplateRule(Project project) {
@@ -22,20 +24,37 @@ class InstallTemplateRule implements Rule {
 
     @Override
     void apply(String taskName) {
-        def m = taskName =~ /installTemplate([A-Z\-]\S+)/
-        if (m) {
-            def camelCaseTmplName = m[0][1]
-
-            def pkgTask = (Zip) project.tasks.getByName("packageTemplate${camelCaseTmplName}")
-            if (!pkgTask) return
-
-            project.tasks.create(taskName, Copy).with {
-                def ext = project.extensions.lazybones
-
-                from pkgTask
-                rename(/(.*)${ext.packageNameSuffix}(\-[0-9].*)\.zip/, '$1$2.zip')
-                into ext.installDir
+        def templateName = extractTemplateName(taskName)
+        if (templateName) {
+            def packageTask = findPackageTask(templateName)
+            if (packageTask) {
+                createInstallTask(taskName, packageTask)
             }
+        }
+    }
+
+    private String extractTemplateName(String taskName) {
+        def matcher = taskName =~ TEMPLATE_NAME_PATTERN
+        return matcher ? matcher[0][1] : null
+    }
+
+    private Zip findPackageTask(String templateName) {
+        def taskName = "packageTemplate${templateName}"
+        return project.tasks.findByName(taskName) as Zip
+    }
+
+    private void createInstallTask(String taskName, Zip packageTask) {
+        def lazybonesExtension = project.extensions.lazybones
+        project.tasks.create(taskName, Copy).with {
+            from packageTask
+            rename createPackageFileNameTransformer(lazybonesExtension.packageNameSuffix)
+            into lazybonesExtension.installDir
+        }
+    }
+
+    private Closure<String> createPackageFileNameTransformer(String packageSuffix) {
+        return { String fileName ->
+            fileName.replaceAll(/(.*)${packageSuffix}(\-[0-9].*)\.zip/, '$1$2.zip')
         }
     }
 
@@ -45,5 +64,7 @@ class InstallTemplateRule implements Rule {
     }
 
     @Override
-    String toString() { return "Rule: $description" }
+    String toString() {
+        return "Rule: $description"
+    }
 }

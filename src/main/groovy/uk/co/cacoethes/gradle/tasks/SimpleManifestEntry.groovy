@@ -55,7 +55,8 @@ class SimpleManifestEntry extends DefaultTask {
         if (manifest.createNewFile()) {
             manifest << "name,version,owner,description\n"
         }
-        manifest << "${packageName},${version},\"${tmplOwner}\",\"${tmplDescription}\"\n"
+         manifest << "${packageName},${version},\"${tmplOwner}\",\"${tmplDescription}\"\n"
+
     }
 
 } // end Task
