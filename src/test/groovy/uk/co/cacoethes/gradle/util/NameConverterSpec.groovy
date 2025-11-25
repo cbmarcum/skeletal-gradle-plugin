@@ -3,9 +3,7 @@ package uk.co.cacoethes.gradle.util
 import spock.lang.Specification
 import spock.lang.Unroll
 
-/**
- *
- */
+
 class NameConverterSpec extends Specification {
     @Unroll
     def "Convert '#name' camel-case to hyphenated"() {

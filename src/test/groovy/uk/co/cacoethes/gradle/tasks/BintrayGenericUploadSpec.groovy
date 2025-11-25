@@ -5,9 +5,7 @@ import org.gradle.testfixtures.ProjectBuilder
 import spock.lang.Shared
 import spock.lang.Specification
 
-/**
- *
- */
+
 class BintrayGenericUploadSpec extends Specification {
     @Shared String baseRepoUrl = "https://api.bintray.com/content/pledbrook/lazybones-templates"
     @Shared String mockPath = "dummy/1.0/dummy-template-1.0.zip"
@@ -20,12 +18,12 @@ class BintrayGenericUploadSpec extends Specification {
         }
 
         def project = ProjectBuilder.builder().build()
-        def task = project.task("testUpload", type: BintrayGenericUpload) {
+        def task = project.tasks.register("testUpload", BintrayGenericUpload) {
             artifactFile = mockFile
             artifactUrlPath = mockPath
             repositoryUrl = repoUrl
             publish = autoPublish
-        }
+        }.get()
 
         when: "I calculate the full URL"
         def targetUrl = task.calculateUploadUrl()
