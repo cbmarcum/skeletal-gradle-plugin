@@ -22,7 +22,7 @@ plugins {
 archivesBaseName = "skeletal-gradle"
 group = "net.codebuilders"
 // make sure to also change this in doc header and jreleaser.yml
-version = '2.1.0'
+version = '2.1.1-SNAPSHOT'
 
 ext {
     isReleaseVersion = !version.endsWith("SNAPSHOT") // used to not pgp sign snapshots
