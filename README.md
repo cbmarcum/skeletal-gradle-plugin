@@ -22,13 +22,19 @@ package, install, and publish them individually or all together. In addition,
 you can also easily set up subtemplates. Let's see how you use the plugin.
 
 ## Building the Plugin
+
+### Prerequisites
+
+Make sure the version is updated in `build.gradle` , `index.adoc`, and `jreleaser.yml` files.  Also generate the HTML file from the AsciiDoc source using the IntelliJ AsciiDoc plugin.
+
+### Building the Plugin
 To build into a repo within the build output
 ```shell
 ./gradlew publish
 ```
 This builds a repo layout that you can use from an Artifactory Gradle repository or similar artifact repository.
 
-checksums and signatures removed for brevity and version may not be latest...
+checksums and signatures removed for brevity (version may not be latest) ...
 ```shell
 build/repos/releases
 `-- net
@@ -48,12 +54,35 @@ build/repos/releases
             `-- maven-metadata.xml
 ```
 
+### Local Testing of the Plugin with Skeletal
 To publish into your local Maven cache
 ```shell
 ./gradlew publishToMavenLocal
 ```
+
+Edit the Skeletal project `settings.gradle` file and enable the resolution strategy abd local maven repository.
+```groovy
+resolutionStrategy {
+        eachPlugin {
+            if (requested.id.namespace == 'net.codebuilders') {
+                useModule("net.codebuilders:skeletal-gradle:${lazybonesGradlePluginVersion}")
+            }
+        }
+    }
+    
+    repositories {
+        // testing gradle plugin snapshots from local only
+        mavenLocal()
+
+        gradlePluginPortal()
+    }
+```
+
+### Publishing to a Maven Repository
+To publish to a Maven repository, you will need to setup the repository URL and credentials in your Gradle settings file.
 You will need to either setup signing credentials for the [Signing Plugin](https://docs.gradle.org/current/userguide/signing_plugin.html), make the version end in _-SNAPSHOT_, or force the build variable _isReleaseVersion_ to false.
 
+### Publishing to Gradle Plugins (Official Releases)
 To publish to [Gradle Plugins](https://plugins.gradle.org/plugin/net.codebuilders.lazybones-templates)
 ```shell
 ./gradlew publishPlugins
@@ -66,12 +95,11 @@ Releases are created in the GitHub repo by creating a tag and a Release based on
 This is automated by JReleaser using the jreleaser.yml configuration file.
 
 Steps to create a release after Gradle `publish` or `publishPlugins`
-1. `export JRELEASER_PROJECT_VERSION=version to release`
-2. `export JRELEASER_OUTPUT_DIRECTORY=build` (until added to jreleaser.yml)
-3. `jreleaser config`
-4. `jreleaser full-release --dry-run`
-5. check `build/jreleaser/release/CHANGELOG.md` for errors
-6. `jreleaser full-release`
+1. `export JRELEASER_OUTPUT_DIRECTORY=build` (until added to jreleaser.yml)
+2. `jreleaser config`
+3. `jreleaser full-release --dry-run`
+4. check `build/jreleaser/release/CHANGELOG.md` for errors
+5. `jreleaser full-release`
 
 ## Credits
 

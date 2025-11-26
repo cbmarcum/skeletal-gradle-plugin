@@ -22,7 +22,7 @@ plugins {
 archivesBaseName = "skeletal-gradle"
 group = "net.codebuilders"
 // make sure to also change this in doc header and jreleaser.yml
-version = '2.0.0'
+version = '2.1.0'
 
 ext {
     isReleaseVersion = !version.endsWith("SNAPSHOT") // used to not pgp sign snapshots
@@ -41,6 +41,7 @@ dependencies {
 
     testImplementation("org.spockframework:spock-core:2.4-M7-groovy-3.0")
     testImplementation "net.bytebuddy:byte-buddy:1.14.11"
+    testImplementation("org.objenesis:objenesis:3.4") // for Mocking SimpleManifestEntry
 }
 
 java {
